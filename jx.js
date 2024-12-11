@@ -10,12 +10,17 @@ this.theme = theme;
 
 }
 
+let bookCardContainer = document.createElement("div")
+bookCardContainer.classList.add("cardClass")
+document.body.appendChild(bookCardContainer)
+
+
 function addBookToLibrary() {
   
     for (const element of myLibrary){
     let bookName = document.createElement("div")
-    bookName.textContent = element;
-    document.body.appendChild(bookName)
+    bookName.textContent = `Title: ${element.title}, Read: ${element.read}, Theme: ${element.theme}`;
+    bookCardContainer.appendChild(bookName)
     bookName.classList.add("boxes")
 
     
@@ -70,16 +75,32 @@ submitButton.addEventListener("click", ()=>{
     let iThValue = inputTheme.value;
     let iTValue = inputTitle.value;
 
+
+
   let myNewBook =  new Book(iTValue, iRValue, iThValue);
 
-  myLibrary.push(myNewBook.title)
-  myLibrary.push(myNewBook.read)
-  myLibrary.push(myNewBook.theme)
+  myLibrary.push(myNewBook);
 
-  addBookToLibrary()
+  addBookToLibrary();
+
+   form.reset();
+
 
 })
 })
+
+let deleteAll = document.createElement("button")
+deleteAll.textContent = "Delete me"
+bookCardContainer.appendChild(deleteAll)
+
+deleteAll.addEventListener("click", ()=>{
+
+    myLibrary.forEach(element=>{
+        element.remove();
+    })
+})
+
+
 
 
 
